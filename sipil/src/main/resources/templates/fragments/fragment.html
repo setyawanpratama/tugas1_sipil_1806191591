@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Home</title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    </head>
+
+    <head th:fragment="js">
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous">
+        </script>
+        <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+</head>
+<body>
+<nav
+        th:fragment="navbar"
+        class="navbar navbar-expand-lg navbar-dark bg-dark"
+>
+    <a class="navbar-brand font-weight-bold text-white" th:href="@{/}">SIPILOT</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <a class="nav-item nav-link active text-white" th:href="@{/pilot}">
+                Pilot<span class="sr-only">(current)</span>
+            </a>
+            <a class="nav-item nav-link active text-white" th:href="@{/penerbangan}">
+                Penerbangan<span class="sr-only">(current)</span>
+            </a>
+            <a class="nav-item nav-link active text-white dropdown-toggle" href="#" id="navbarDropdownMenu" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cari
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+                <a class="dropdown-item" th:href="@{/cari}">Cari Pilot berdasarkan Maskapai/Akademi<span class="sr-only">(current)</span></a>
+                <a class="dropdown-item" th:href="@{/cari/pilotpenerbanganterbanyak}">Cari Pilot dengan Penerbangan Terbanyak </a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

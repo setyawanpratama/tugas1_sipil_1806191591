@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View All Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid" style="margin-top: 5%">
+        <a th:href="@{/penerbangan/tambah/}" class="btn btn-secondary mb-4">+ Tambah Penerbangan</a>
+        <div class="card">
+            <div class="card-header bg-dark text-center text-bold text-white">
+                Daftar Penerbangan
+            </div>
+            <div clas="card-body" style="margin: 0% 2% 0% 2%">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Penerbangan</th>
+                            <th>Waktu</th>
+                            <th>Kota Asal</th>
+                            <th>Kota Tujuan</th>
+                            <th></th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="penerbangan, iterationStatus : ${listPenerbangan}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${penerbangan.kode}"></td>
+                            <td th:text="${penerbangan.waktu}"></td>
+                            <td th:text="${penerbangan.kotaAsal}"></td>
+                            <td th:text="${penerbangan.kotaTujuan}"></td>
+                            <td>
+                                <a th:href="@{/penerbangan/detail/} + ${penerbangan.id}">Lihat</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/penerbangan/ubah/} + ${penerbangan.id}">Ubah</a>
+                            </td>
+                            <td>
+                                <form th:action="@{/penerbangan/hapus}" th:object="${penerbangan}" method="post">
+                                    <input type="hidden" name="id" th:value="${penerbangan.id}" />
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

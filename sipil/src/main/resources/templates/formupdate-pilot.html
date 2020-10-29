@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Data Obat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="card" style="margin: 2% 25% 2% 25%">
+            <div class="card-header bg-dark text-center text-white font-weight-bold">Ubah Pilot</div>
+            <div class="card-body">
+                <form th:action="@{/pilot/ubah}" th:object="${pilot}" method="POST">
+                    <input type="hidden" th:field="*{Id}"/>
+                    <input type="hidden" th:field="*{nip}"/>
+                    <label for="nama">Nama</label>
+                    <input type="text" class="form-control" name="nama" id="nama" th:value="*{nama}"/>
+                    <br>
+                    <label for="nik">NIK</label>
+                    <input type="text" class="form-control" name="nik" id="nik" th:value="*{nik}"/>
+                    <br>
+                    <label for="tempatlahir">Tempat Lahir</label>
+                    <input type="text" class="form-control" name="tempatLahir" id="tempatlahir" th:value="*{tempatLahir}"/>
+                    <br>
+                    <label for="tanggallahir">Tanggal Lahir</label>
+                    <input type="text" class="form-control" name="tanggalLahir" id="tanggallahir" th:value="*{tanggalLahir}"/>
+                    <br>
+                    <label for="jeniskelamin">Jenis Kelamin</label>
+                    <select class="form-control" name="jenisKelamin" id="jeniskelamin">
+                        <option value="1" th:selected="*{jenisKelamin} == 1">Laki-laki</option>
+                        <option value="2" th:selected="*{jenisKelamin} == 2">Perempuan</option>
+                    </select>
+                    <br>
+                    <label for="akademiModel">Sekolah</label>
+                    <select class="form-control" name="akademiModel" id="akademiModel">
+                        <option value="1">Sekolah Terbang Tinggi</option>
+                        <option value="2">Sekolah Angkasa Luar</option>
+                        <option value="3">Sekolah Galaksi</option>
+                        <option value="4">Sekolah Daun Hijau</option>
+                        <option value="5">Sekolah Angkatan Udara</option>
+                        <option value="6">Sekolah Angkasa Udara</option>
+                    </select>
+                    <br>
+                    <label for="maskapaiModel">Maskapai</label>
+                    <select class="form-control" name="maskapaiModel" id="maskapaiModel">
+                        <option value="1">LienAir</option>
+                        <option value="2">SriAir</option>
+                        <option value="3">AsiaAir</option>
+                        <option value="4">GarudaAir</option>
+                        <option value="5">FlyEmiret</option>
+                        <option value="6">ButikAir</option>
+                        <option value="7">JakAir</option>
+                    </select>
+                    <br>
+                    <br>
+                    <div class="text-right">
+                        <a th:href="@{/pilot}" class="btn btn-outline-dark mr-2">Batal</a>
+                        <button class="btn btn-dark" type="submit" value="Submit">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

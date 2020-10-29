@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="card bg-dark" style="margin: 5% 20% 3% 20%">
+            <div class="card-body text-center" style="padding: 10% 0% 10% 0%">
+                <h1 class="font-weight-bold text-white">Selamat Datang di SIPILOT!<h1>
+            </div>
+        </div>
+        <div class="daftar-fitur">
+            <h3 class="text-center">Daftar Fitur:</h3>
+        </div>
+        <div class="container text-center" style="margin-top: 2%">
+            <a href="/pilot" class="btn btn-dark text-white" role="button" style="margin-right: 1%">Pilot</a>
+            <a href="/penerbangan" class="btn btn-dark text-white" role="button">Penerbangan</a>
+            <a href="/cari" class="btn btn-dark text-white" role="button" style="margin-left: 1%">Cari</a>
+        </div>
+    </div>
+</body>
+</html>

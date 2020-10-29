@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Add Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <div class="card" style="margin: 2% 25% 2% 25%">
+        <div class="card-header bg-dark font-weight-bold text-center text-white">
+            Tambah Penerbangan
+        </div>
+        <div class="card-body">
+            <form th:href="@{/penerbangan/tambah}" th:object="${penerbangan}" method="POST">
+                <label for="kode">Kode</label>
+                <input type="text" class="form-control" name="kode" id="kode" placeholder="Masukkan Kode"/>
+                <br>
+                <label for="waktu">Waktu</label>
+                <input type="text" class="form-control" name="waktu" id="waktu" placeholder="Masukkan Waktu"/>
+                <br>
+                <label for="kotaAsal">Kota Asal</label>
+                <input type="text" class="form-control" name="kotaAsal" id="kotaAsal" placeholder="Masukkan Kota Asal"/>
+                <br>
+                <label for="kotaTujuan">Kota Tujuan</label>
+                <input type="text" class="form-control" name="kotaTujuan" id="kotaTujuan" placeholder="Masukkan Kota Tujuan"/>
+                <br>
+                <br>
+                <div class="text-right">
+                    <a th:href="@{/pilot}" class="btn btn-outline-dark mr-2">Batal</a>
+                    <button class="btn btn-dark" type="submit" value="Submit">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

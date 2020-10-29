@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid">
+        <section>
+            <br/>
+            <div class="card" style="margin: 2% 30% 2% 30%">
+                <div class="card-header bg-dark text-center text-white font-weight-bold">Detail Pilot</div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="Id"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${pilot.Id}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="Nama"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${pilot.nama}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="'Jenis Kelamin'"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:if="${pilot.jenisKelamin == 1}"><span th:text="':  Laki-laki'"></span></p>
+                                <p th:if="${pilot.jenisKelamin == 2}"><span th:text="':  Perempuan'"></span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="NIP"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${pilot.nip}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="'Tempat Lahir'"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${pilot.tempatLahir}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="'Tanggal Lahir'"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${pilot.tanggalLahir}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="Sekolah"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${akademi}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <p th:text="Maskapai"><p>
+                            </div>
+                            <div class="col-8">
+                                <p th:text="':  ' + ${maskapai}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="card" style="margin: 2% 15% 2% 15%">
+                <div class="card-header bg-dark text-white text-center font-weight-bold">Jadwal Bertugas</div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Penerbangan</th>
+                            <th>Waktu</th>
+                            <th>Kota Asal</th>
+                            <th>Kota Tujuan</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
