@@ -88,7 +88,6 @@ public class PenerbanganController {
             Model model
     ){
         Long Id = pilotPenerbangan.getPilotModel().getId();
-        System.out.println(idPenerbangan);
 
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
 
@@ -109,8 +108,6 @@ public class PenerbanganController {
         pilotPenerbangan.setPilotModel(selectedpilot);
 
         pilotPenerbanganService.addPilotPenerbangan(pilotPenerbangan);
-
-        System.out.println(selectedpilot.getNama());
 
         model.addAttribute("kode", pilotPenerbangan.getPenerbanganModel().getKode());
         model.addAttribute("nama", selectedpilot.getNama());
@@ -164,17 +161,47 @@ public class PenerbanganController {
         }
     }
 
+    @GetMapping("/penerbangan/hapus/{id}")
+    private String deletePenerbanganUsingId(
+            @PathVariable(value="id") Long id, Model model
+    ){
+        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(id);
+        String kode = penerbangan.getKode();
+
+        if(penerbangan.getPenerbanganPilot().size() > 0){
+            model.addAttribute("kode", kode);
+
+            return "deletecancel-penerbangan";
+        }
+        else {
+            penerbanganService.deletePenerbangan(penerbangan);
+            model.addAttribute("kode", kode);
+            return "delete-penerbangan";
+        }
+    }
+
     @GetMapping("/cari/pilot/bulan-ini")
     private String pilotBulanIni(Model model){
         List<PenerbanganModel> listPenerbangan = penerbanganService.getPenerbanganList();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
 
+        List<PilotModel> pilotBulanIni = new ArrayList<>();
+
         Integer month = now.getMonthValue();
 
         for(PenerbanganModel penerbangan : listPenerbangan){
-            if(month == penerbangan.getWaktu().getMonth());
+            if(month == penerbangan.getWaktu().getMonth() + 1){
+                for(PilotPenerbanganModel pilotPenerbangan : penerbangan.getPenerbanganPilot()){
+                    PilotModel pilot = pilotPenerbangan.getPilotModel();
+                    if(!pilotBulanIni.contains(pilot)){
+                        pilotBulanIni.add(pilotPenerbangan.getPilotModel());
+                    }
+                }
+            }
         }
+
+        model.addAttribute("listPilot", pilotBulanIni);
 
         return "viewall-pilotbulanini";
     }

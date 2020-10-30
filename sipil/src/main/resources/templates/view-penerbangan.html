@@ -55,6 +55,12 @@
                             <p th:text="':  ' + ${tanggalPenugasan}"></p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <a th:href="@{/penerbangan/ubah/} + ${penerbangan.id}" class="btn btn-primary mr-1">Ubah</a>
+                            <a th:href="@{/penerbangan/hapus/} + ${penerbangan.id}" class="btn btn-danger">Hapus</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

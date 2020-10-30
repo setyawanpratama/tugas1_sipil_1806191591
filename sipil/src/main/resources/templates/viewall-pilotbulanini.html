@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>View Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="card" style="margin: 5% 15% 3% 13%">
+        <div class="card-header bg-dark text-white text-center font-weight-bold">Daftar Pilot Pada Penerbangan Bulan Ini</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NIP</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pilot, iterationStatus : ${listPilot}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${pilot.nama}"></td>
+                        <td th:text="${pilot.nip}"></td>
+                        <td th:text="${pilot.tanggalLahir}"></td>
+                        <td>
+                            <div th:if="${pilot.jenisKelamin==1}">Laki-laki</div>
+                            <div th:if="${pilot.jenisKelamin==2}">Perempuan</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

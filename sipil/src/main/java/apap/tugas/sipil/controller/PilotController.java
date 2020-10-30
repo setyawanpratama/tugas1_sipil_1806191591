@@ -53,6 +53,13 @@ public class PilotController {
     private String addPilot(
             @ModelAttribute PilotModel pilot, Model model
     ){
+        List<PilotModel> listPilot = pilotService.getPilotList();
+        List<String> NIP = new ArrayList<>();
+
+        for(PilotModel i : listPilot){
+            NIP.add(i.getNip());
+        }
+
         String kode_jeniskelamin = pilot.getJenisKelamin().toString();
 
         String nama = pilot.getNama();
@@ -73,7 +80,21 @@ public class PilotController {
         char b = (char) ('a' + rnd.nextInt(26));
         String kode_random = ("" + a + b).toUpperCase();
 
-        String nip = kode_jeniskelamin + kode_tempatlahir + kode_nama + kode_haribulan + kode_tahun + kode_random;
+        String notfinished = kode_jeniskelamin + kode_tempatlahir + kode_nama + kode_haribulan + kode_tahun;
+        String nip = notfinished + kode_random;
+
+        boolean unique = false;
+
+        if(NIP.contains(nip)){
+            unique = true;
+        }
+
+        while(unique){
+            a = (char) ('a' + rnd.nextInt(26));
+            b = (char) ('a' + rnd.nextInt(26));
+            kode_random = ("" + a + b).toUpperCase();
+            nip = notfinished + kode_random;
+        }
 
         pilot.setNip(nip);
 
@@ -121,6 +142,13 @@ public class PilotController {
     private String updatePilot(
             @ModelAttribute PilotModel pilot, Model model
     ){
+        List<PilotModel> listPilot = pilotService.getPilotList();
+        List<String> NIP = new ArrayList<>();
+
+        for(PilotModel i : listPilot){
+            NIP.add(i.getNip());
+        }
+
         String kode_jeniskelamin = pilot.getJenisKelamin().toString();
 
         String nama = pilot.getNama();
@@ -141,9 +169,25 @@ public class PilotController {
         char b = (char) ('a' + rnd.nextInt(26));
         String kode_random = ("" + a + b).toUpperCase();
 
-        String nip = kode_jeniskelamin + kode_tempatlahir + kode_nama + kode_haribulan + kode_tahun + kode_random;
+        String notfinished = kode_jeniskelamin + kode_tempatlahir + kode_nama + kode_haribulan + kode_tahun;
+        String nip = notfinished + kode_random;;
+
+        boolean unique = false;
+
+        if(NIP.contains(nip)){
+            unique = true;
+        }
+
+        while(unique){
+            a = (char) ('a' + rnd.nextInt(26));
+            b = (char) ('a' + rnd.nextInt(26));
+            kode_random = ("" + a + b).toUpperCase();
+            nip = notfinished + kode_random;
+        }
 
         pilot.setNip(nip);
+
+        model.addAttribute("nip", nip);
 
         PilotModel updatedpilot = pilotService.updatePilot(pilot);
 
@@ -237,6 +281,8 @@ public class PilotController {
             if(idMaskapai != 0) {
                 MaskapaiModel maskapai = maskapaiService.getMaskapaiById(idMaskapai);
                 List<PilotModel> pilot = maskapai.getListPilotMaskapai();
+
+                model.addAttribute("selectedMaskapai", maskapai.getId());
 
                 Map<PilotModel, Integer> mapper = new HashMap<PilotModel, Integer>();
 
