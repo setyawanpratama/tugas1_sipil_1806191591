@@ -18,4 +18,8 @@ public class PilotPenerbanganServiceImpl implements PilotPenerbanganService{
         return pilotPenerbanganDb.findById(id).get();
     }
 
+    @Override
+    public void addPilotPenerbangan(PilotPenerbanganModel pilotPenerbangan){
+        pilotPenerbanganDb.save(pilotPenerbangan);
+    }
 }

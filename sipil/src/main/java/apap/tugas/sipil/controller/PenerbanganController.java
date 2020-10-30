@@ -4,6 +4,7 @@ import apap.tugas.sipil.model.PenerbanganModel;
 import apap.tugas.sipil.model.PilotModel;
 import apap.tugas.sipil.model.PilotPenerbanganModel;
 import apap.tugas.sipil.service.PenerbanganService;
+import apap.tugas.sipil.service.PilotPenerbanganService;
 import apap.tugas.sipil.service.PilotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +27,9 @@ public class PenerbanganController {
 
     @Autowired
     PenerbanganService penerbanganService;
+
+    @Autowired
+    PilotPenerbanganService pilotPenerbanganService;
 
     @GetMapping("/penerbangan")
     private String ViewAllPenerbangan(Model model){
@@ -77,20 +83,37 @@ public class PenerbanganController {
 
     @PostMapping("/penerbangan/{idPenerbangan}/pilot/tambah")
     private String addPilotToPenerbangan(
-            @ModelAttribute PilotModel pilot, @PathVariable(value = "idPenerbangan") Long idPenerbangan,
+            @ModelAttribute PilotPenerbanganModel pilotPenerbangan,
+            @PathVariable Long idPenerbangan,
             Model model
     ){
+        Long Id = pilotPenerbangan.getPilotModel().getId();
+        System.out.println(idPenerbangan);
+
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
-        PilotPenerbanganModel pilotPenerbangan = new PilotPenerbanganModel();
 
-        System.out.println(pilot.getId());
+        Date date = new java.util.Date();
+        pilotPenerbangan.setTanggalPenugasan(date);
 
-        pilotPenerbangan.setPilotModel(pilot);
         pilotPenerbangan.setPenerbanganModel(penerbangan);
-        penerbangan.getPenerbanganPilot().add(pilotPenerbangan);
 
-        model.addAttribute("nama", pilot.getNama());
-        model.addAttribute("id", penerbangan.getKode());
+        List<PilotModel> listPilot = pilotService.getPilotList();
+        PilotModel selectedpilot = new PilotModel();
+
+        for(PilotModel pilot: listPilot){
+            if(pilot.getId() == Id){
+                selectedpilot = pilot;
+            }
+        }
+
+        pilotPenerbangan.setPilotModel(selectedpilot);
+
+        pilotPenerbanganService.addPilotPenerbangan(pilotPenerbangan);
+
+        System.out.println(selectedpilot.getNama());
+
+        model.addAttribute("kode", pilotPenerbangan.getPenerbanganModel().getKode());
+        model.addAttribute("nama", selectedpilot.getNama());
         return "add-pilottopenerbangan";
     }
 
@@ -139,5 +162,20 @@ public class PenerbanganController {
 
             return "delete-penerbangan";
         }
+    }
+
+    @GetMapping("/cari/pilot/bulan-ini")
+    private String pilotBulanIni(Model model){
+        List<PenerbanganModel> listPenerbangan = penerbanganService.getPenerbanganList();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        Integer month = now.getMonthValue();
+
+        for(PenerbanganModel penerbangan : listPenerbangan){
+            if(month == penerbangan.getWaktu().getMonth());
+        }
+
+        return "viewall-pilotbulanini";
     }
 }

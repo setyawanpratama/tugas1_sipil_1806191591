@@ -1,5 +1,7 @@
 package apap.tugas.sipil.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,6 +33,7 @@ public class PenerbanganModel implements Serializable{
     private String kotaTujuan;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "waktu", nullable = false)
     private Date waktu;
 

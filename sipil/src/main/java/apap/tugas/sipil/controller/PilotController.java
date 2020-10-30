@@ -65,7 +65,6 @@ public class PilotController {
         String tahun = formattahun.format(tanggallahir);
         Integer doubtahun = (int)Math.floor(Integer.parseInt(tahun) / 10);
         String kode_tahun = String.valueOf(doubtahun);
-        //bikin if else untuk kode_tahun lenght != 3
 
         String kode_tempatlahir = pilot.getTempatLahir().substring(0,2).toUpperCase();
 
@@ -122,6 +121,30 @@ public class PilotController {
     private String updatePilot(
             @ModelAttribute PilotModel pilot, Model model
     ){
+        String kode_jeniskelamin = pilot.getJenisKelamin().toString();
+
+        String nama = pilot.getNama();
+        String kode_nama = nama.substring(nama.length() - 1).toUpperCase();
+
+        Date tanggallahir = pilot.getTanggalLahir();
+        DateFormat formatharibulan = new SimpleDateFormat("ddMM");
+        DateFormat formattahun = new SimpleDateFormat("YYYY");
+        String kode_haribulan = formatharibulan.format(tanggallahir);
+        String tahun = formattahun.format(tanggallahir);
+        Integer doubtahun = (int)Math.floor(Integer.parseInt(tahun) / 10);
+        String kode_tahun = String.valueOf(doubtahun);
+
+        String kode_tempatlahir = pilot.getTempatLahir().substring(0,2).toUpperCase();
+
+        Random rnd = new Random();
+        char a = (char) ('a' + rnd.nextInt(26));
+        char b = (char) ('a' + rnd.nextInt(26));
+        String kode_random = ("" + a + b).toUpperCase();
+
+        String nip = kode_jeniskelamin + kode_tempatlahir + kode_nama + kode_haribulan + kode_tahun + kode_random;
+
+        pilot.setNip(nip);
+
         PilotModel updatedpilot = pilotService.updatePilot(pilot);
 
         model.addAttribute("nip", updatedpilot.getNip());
@@ -249,5 +272,4 @@ public class PilotController {
 
             return "viewcari-tigapilot";
     }
-
 }
