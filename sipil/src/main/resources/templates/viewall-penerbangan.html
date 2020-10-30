@@ -36,14 +36,15 @@
                             <td th:text="${penerbangan.kotaAsal}"></td>
                             <td th:text="${penerbangan.kotaTujuan}"></td>
                             <td>
-                                <a th:href="@{/penerbangan/detail/} + ${penerbangan.id}">Lihat</a>
+                                <a class="btn btn-primary" th:href="@{/penerbangan/detail/} + ${penerbangan.id}">Lihat</a>
                             </td>
                             <td>
-                                <a th:href="@{/penerbangan/ubah/} + ${penerbangan.id}">Ubah</a>
+                                <a  class="btn btn-info" th:href="@{/penerbangan/ubah/} + ${penerbangan.id}">Ubah</a>
                             </td>
                             <td>
                                 <form th:action="@{/penerbangan/hapus}" th:object="${penerbangan}" method="post">
                                     <input type="hidden" name="id" th:value="${penerbangan.id}" />
+                                    <input type="hidden" name="kode" th:value="${penerbangan.kode}" />
                                     <input type="submit" value="Delete" class="btn btn-danger" />
                                 </form>
                             </td>

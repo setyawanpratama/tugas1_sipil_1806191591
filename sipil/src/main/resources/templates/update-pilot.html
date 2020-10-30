@@ -8,7 +8,10 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2 th:text = "'Pilot dengan NIP ' + ${nip} + ' berhasil diupdate.'"></h2>
-    <a href = "/pilot">Kembali</a>
+    <div class="container text-center mt-5">
+        <h2 th:text = "'Pilot dengan NIP ' + ${nip}"></h2>
+        <h2 th:text = "'berhasil diupdate.'"></h2>
+        <a href = "/pilot">Kembali</a>
+    </div>
 </body>
 </html>

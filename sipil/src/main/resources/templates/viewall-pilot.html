@@ -17,39 +17,39 @@
             <div clas="card-body" style="margin: 0% 2% 0% 2%">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NIP</th>
-                        <th>NIK</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Jenis Kelamin</th>
-                        <th></th>
-                        <th>Aksi</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>NIP</th>
+                            <th>NIK</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Jenis Kelamin</th>
+                            <th></th>
+                            <th>Aksi</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="pilot, iterationStatus : ${listPilot}">
-                        <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${pilot.nama}"></td>
-                        <td th:text="${pilot.nip}"></td>
-                        <td th:text="${pilot.nik}"></td>
-                        <td th:text="${pilot.tanggalLahir}"></td>
-                        <td>
-                            <div th:if="${pilot.jenisKelamin==1}">Laki-laki</div>
-                            <div th:if="${pilot.jenisKelamin==2}">Perempuan</div>
-                        </td>
-                        <td>
-                            <a th:href="@{/pilot/} + ${pilot.nip}">Lihat</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/pilot/ubah/} + ${pilot.nip}">Ubah</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/pilot/hapus/} + ${pilot.nip}">Hapus</a>
-                        </td>
-                    </tr>
+                        <tr th:each="pilot, iterationStatus : ${listPilot}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${pilot.nama}"></td>
+                            <td th:text="${pilot.nip}"></td>
+                            <td th:text="${pilot.nik}"></td>
+                            <td th:text="${pilot.tanggalLahir}"></td>
+                            <td>
+                                <div th:if="${pilot.jenisKelamin==1}">Laki-laki</div>
+                                <div th:if="${pilot.jenisKelamin==2}">Perempuan</div>
+                            </td>
+                            <td>
+                                <a th:href="@{/pilot/} + ${pilot.nip}" class="btn btn-primary">Lihat</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/pilot/ubah/} + ${pilot.nip}" class="btn btn-info">Ubah</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/pilot/hapus/} + ${pilot.nip}" class="btn btn-danger">Hapus</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

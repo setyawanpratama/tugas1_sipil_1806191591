@@ -8,7 +8,10 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h2 th:text = "'Penerbangan ' + ${kode} + ' berhasil dihapus.'"></h2>
-    <a href = "/penerbangan">Kembali</a>
+    <div class="container text-center mt-5">
+        <h2 th:text = "'Penerbangan ' + ${kode}"></h2>
+        <h2 th:text = "' berhasil dihapus'"></h2>
+        <a href = "/penerbangan"><u>Kembali ke Daftar Penerbangan</u></a>
+    </div>
 </body>
 </html>

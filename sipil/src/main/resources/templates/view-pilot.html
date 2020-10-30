@@ -80,6 +80,12 @@
                                 <p th:text="':  ' + ${maskapai}"></p>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <a th:href="@{/pilot/ubah/} + ${pilot.nip}" class="btn btn-primary mr-1">Ubah</a>
+                                <a th:href="@{/pilot/hapus/} + ${pilot.nip}" class="btn btn-danger">Hapus</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,6 +106,16 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <tr th:each="penerbangan, iterationStatus : ${list}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${penerbangan.kode}"></td>
+                            <td th:text="${penerbangan.waktu}"></td>
+                            <td th:text="${penerbangan.kotaAsal}"></td>
+                            <td th:text="${penerbangan.kotaTujuan}"></td>
+                            <td>
+                                <a th:href="@{/penerbangan/detail/} + ${penerbangan.id}" class="btn btn-primary">Lihat</a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

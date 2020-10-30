@@ -7,8 +7,11 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<h2 th:text = "'Penerbangan dengan id ' + ${id} + ' berhasil diupdate.'"></h2>
-<a href = "/penerbangan">Kembali</a>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container text-center mt-5">
+        <h2 th:text = "'Penerbangan dengan' + ${id}"></h2>
+        <h2 th:text = "'berhasil diupdate'"></h2>
+        <a href = "/penerbangan">Kembali</a>
+    </div>
 </body>
 </html>

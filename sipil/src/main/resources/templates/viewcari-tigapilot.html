@@ -7,50 +7,51 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container-fluid" style="margin: 5% 10% 3% 12%">
-    <div class="row">
-        <div class="col">
-            <h4 class="font-weight-bold">Pilih Kode Maskapai</h4>
-        </div>
-        <div class="col">
-        </div>
-    </div>
-    <form th:action="@{/cari/pilot/penerbangan-terbanyak}">
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container-fluid" style="margin: 5% 10% 3% 12%">
         <div class="row">
-            <div class="col col-3">
-                <select class="form-control" th:name="kodeMaskapai">
-                    <option th:value="0">Kode Maskapai</option>
-                    <option th:each="maskapai : ${maskapai}" th:text="${maskapai.nama}" th:value="${maskapai.id}" th:selected="${maskapai.id} == ${selectedMaskapai}"></option>
-                </select>
+            <div class="col">
+                <h4 class="font-weight-bold">Pilih Kode Maskapai</h4>
             </div>
             <div class="col">
-                <button type="submit" class="btn btn-primary">Cari</button>
             </div>
         </div>
-    </form>
-</div>
-<div class="card" style="margin: 5% 15% 3% 13%">
-    <div class="card-header bg-dark text-white text-center font-weight-bold">Daftar 3 Pilot Terbaik Berdasarkan Penerbangan Terbanyak</div>
-    <div class="card-body">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>NIP</th>
-                <th>Jumlah Penerbangan</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr th:each="pilot, iterationStatus : ${threeselected}">
-                    <td th:text="${iterationStatus.count}"></td>
-                    <td th:text="${pilot.nama}"></td>
-                    <td th:text="${pilot.nip}"></td>
-                </tr>
-            </tbody>
-        </table>
+        <form th:action="@{/cari/pilot/penerbangan-terbanyak}">
+            <div class="row">
+                <div class="col col-3">
+                    <select class="form-control" th:name="kodeMaskapai">
+                        <option th:value="0">Kode Maskapai</option>
+                        <option th:each="maskapai : ${maskapai}" th:text="${maskapai.nama}" th:value="${maskapai.id}" th:selected="${maskapai.id} == ${selectedMaskapai}"></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
+    <div class="card" style="margin: 5% 15% 3% 13%">
+        <div class="card-header bg-dark text-white text-center font-weight-bold">Daftar 3 Pilot Terbaik Berdasarkan Penerbangan Terbanyak</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIP</th>
+                    <th>Jumlah Penerbangan</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pilot, iterationStatus : ${threeselected}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${pilot.nama}"></td>
+                        <td th:text="${pilot.nip}"></td>
+                        <td class="text-center" th:text="${#lists.size(pilot.pilotPenerbangan)}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

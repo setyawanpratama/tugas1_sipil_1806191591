@@ -92,9 +92,18 @@ public class PilotController {
         AkademiModel akademi = pilot.getAkademiModel();
         MaskapaiModel maskapai = pilot.getMaskapaiModel();
 
+        List<PilotPenerbanganModel> tanggalPenugasan = pilot.getPilotPenerbangan();
+        List<PenerbanganModel> penerbangan = new ArrayList<>();
+
+        for(PilotPenerbanganModel i : tanggalPenugasan){
+            penerbangan.add(i.getPenerbanganModel());
+        }
+
+        model.addAttribute("list", penerbangan);
         model.addAttribute("pilot", pilot);
         model.addAttribute("akademi", akademi.getNama());
         model.addAttribute("maskapai", maskapai.getNama());
+
         return "view-pilot";
     }
 
@@ -105,6 +114,7 @@ public class PilotController {
         PilotModel pilot = pilotService.getPilotByNip(nipPilot);
 
         model.addAttribute("pilot", pilot);
+
         return "formupdate-pilot";
     }
 
@@ -115,10 +125,22 @@ public class PilotController {
         PilotModel updatedpilot = pilotService.updatePilot(pilot);
 
         model.addAttribute("nip", updatedpilot.getNip());
+
         return "update-pilot";
     }
 
-    ///cari/pilot?kodeMaskapai={kodeMaskapai}&idSekolah={idSekolah}
+    @GetMapping(value = "pilot/hapus/{kode}")
+    private String hapusPilot(
+            @PathVariable(value = "kode") String kode, Model model
+    ){
+        PilotModel selected = pilotService.getPilotByNip(kode);
+
+        pilotService.deletePilot(selected);
+
+        model.addAttribute("nip", selected.getNip());
+
+        return "delete-pilot";
+    }
 
     @GetMapping("/cari")
     private String cariPilotPage(Model model){
@@ -129,6 +151,7 @@ public class PilotController {
         model.addAttribute("selectedAkademi", "0");
         model.addAttribute("maskapai", maskapai);
         model.addAttribute("akademi", akademi);
+
         return "viewcari-pilot";
     }
 
@@ -171,6 +194,7 @@ public class PilotController {
         model.addAttribute("selectedPilot", selectedPilot);
         model.addAttribute("maskapai", maskapai);
         model.addAttribute("akademi", akademi);
+
         return "viewcari-pilot";
     }
 
@@ -179,6 +203,7 @@ public class PilotController {
         List<MaskapaiModel> maskapai = maskapaiService.getMaskapaiList();
 
         model.addAttribute("maskapai", maskapai);
+
         return "viewcari-tigapilot";
     }
 
@@ -208,14 +233,11 @@ public class PilotController {
                 if(types.size() >= 3) {
                     for (int i = 0; i < 3; i++) {
                         threeselectedpilot.add(types.get(i));
-
-                        System.out.println(types.get(i).getNama());
                     }
                 }
                 else{
                     for(PilotModel i : types) {
                         threeselectedpilot.add(i);
-                        System.out.println(i.getNama());
                     }
                 }
                 model.addAttribute("threeselected", threeselectedpilot);
@@ -224,6 +246,7 @@ public class PilotController {
             List<MaskapaiModel> listMaskapai = maskapaiService.getMaskapaiList();
 
             model.addAttribute("maskapai", listMaskapai);
+
             return "viewcari-tigapilot";
     }
 

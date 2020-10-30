@@ -64,8 +64,10 @@ public class PenerbanganController {
             if(penerbangan == i.getPenerbanganModel()){
                 tanggalPenugasan = i.getTanggalPenugasan();
             }
-            System.out.println(pilot);
         }
+        //coba-coba
+        model.addAttribute("pilotPenerbangan", new PilotPenerbanganModel());
+
         model.addAttribute("allPilot", pilotService.getPilotList());
         model.addAttribute("listPilot", pilot);
         model.addAttribute("penerbangan", penerbangan);
@@ -75,20 +77,20 @@ public class PenerbanganController {
 
     @PostMapping("/penerbangan/{idPenerbangan}/pilot/tambah")
     private String addPilotToPenerbangan(
-            @ModelAttribute PilotModel pilot, Model model
+            @ModelAttribute PilotModel pilot, @PathVariable(value = "idPenerbangan") Long idPenerbangan,
+            Model model
     ){
-        //PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
+        PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(idPenerbangan);
         PilotPenerbanganModel pilotPenerbangan = new PilotPenerbanganModel();
-        pilotPenerbangan.setPilotModel(pilot);
-        //pilotPenerbangan.setPenerbanganModel(penerbangan);
-        //penerbangan.getPenerbanganPilot().add(pilotPenerbangan);
 
-        System.out.println(pilot.getClass().getSimpleName());
-        System.out.println(pilot.getNama());
-        System.out.println(pilot.getJenisKelamin());
+        System.out.println(pilot.getId());
+
+        pilotPenerbangan.setPilotModel(pilot);
+        pilotPenerbangan.setPenerbanganModel(penerbangan);
+        penerbangan.getPenerbanganPilot().add(pilotPenerbangan);
 
         model.addAttribute("nama", pilot.getNama());
-        //model.addAttribute("id", penerbangan.getKode());
+        model.addAttribute("id", penerbangan.getKode());
         return "add-pilottopenerbangan";
     }
 
@@ -108,7 +110,7 @@ public class PenerbanganController {
     ){
         PenerbanganModel updatedpenerbangan = penerbanganService.updatePenerbangan(penerbangan);
 
-        model.addAttribute("id", updatedpenerbangan.getId());
+        model.addAttribute("id", updatedpenerbangan.getKode());
         return "update-penerbangan";
     }
 
@@ -116,9 +118,26 @@ public class PenerbanganController {
     private String deletePenerbangan(
         @ModelAttribute PenerbanganModel penerbangan, Model model
     ){
-        penerbanganService.deletePenerbangan(penerbangan);
+        // this is stupid (harusnya ada cara yang lebih efisien)
+        List<PenerbanganModel> listPenerbangan = penerbanganService.getPenerbanganList();
+        List<Long> penerbanganwithpilot = new ArrayList<>();
 
-        model.addAttribute("kode", penerbangan.getKode());
-        return "delete-penerbangan";
+        for (PenerbanganModel i : listPenerbangan){
+            if(i.getPenerbanganPilot().size() > 0){
+                penerbanganwithpilot.add(i.getId());
+            }
+        }
+
+        String kode = penerbangan.getKode();
+        if(penerbanganwithpilot.contains(penerbangan.getId())) {
+            model.addAttribute("kode", kode);
+            return "deletecancel-penerbangan";
+        }
+        else{
+            model.addAttribute("kode", kode);
+            penerbanganService.deletePenerbangan(penerbangan);
+
+            return "delete-penerbangan";
+        }
     }
 }

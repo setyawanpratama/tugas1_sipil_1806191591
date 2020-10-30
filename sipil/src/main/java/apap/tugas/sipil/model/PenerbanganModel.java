@@ -37,9 +37,6 @@ public class PenerbanganModel implements Serializable{
     @OneToMany(mappedBy = "penerbanganModel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PilotPenerbanganModel> penerbanganPilot;
 
-    /*@ManyToMany(mappedBy = "listPenerbanganPilot")
-    private List<PilotModel> listPilotPenerbangan;*/
-
     public Long getId() {
         return Id;
     }

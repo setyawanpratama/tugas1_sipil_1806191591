@@ -25,7 +25,7 @@
                     <input type="text" class="form-control" name="tempatLahir" id="tempatlahir" th:value="*{tempatLahir}"/>
                     <br>
                     <label for="tanggallahir">Tanggal Lahir</label>
-                    <input type="text" class="form-control" name="tanggalLahir" id="tanggallahir" th:value="*{tanggalLahir}"/>
+                    <input type="date" class="form-control" name="tanggalLahir" id="tanggallahir" th:value="*{#dates.format(tanggalLahir, 'yyyy-MM-dd')}"/>
                     <br>
                     <label for="jeniskelamin">Jenis Kelamin</label>
                     <select class="form-control" name="jenisKelamin" id="jeniskelamin">

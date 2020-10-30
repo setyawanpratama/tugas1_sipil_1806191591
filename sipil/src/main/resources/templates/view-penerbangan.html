@@ -61,17 +61,19 @@
     </section>
     <section style = "margin: 2% 15% 2% 15%">
         <p>Pilih Pilot</p>
-        <form th:action="@{/penerbangan/} + ${penerbangan.id} + @{/pilot/tambah}" th:object="${penerbangan}" method="POST">
+        <form th:action="@{/penerbangan/} + ${penerbangan.id} + @{/pilot/tambah}" th:object="${pilot}" method="POST">
             <div class="row">
                 <div class="col col-3">
-                    <select class="form-control" th:field="*{allPilot}" style="width:100%">
+                    <select class="form-control" th:field="" style="width:100%">
                         <option value="0">--Pilih nama Pilot--</option>
-                        <option th:each="availpilot : ${allPilot}" th:text="${availpilot.nama}" th:value="${availpilot}"></option>
+                        <option th:each="availpilot : ${allPilot}" th:text="${availpilot.nama}" th:value="${availpilot.id}">
+                            <input type="hidden" th:value="${availpilot.id}"/>
+                            <input type="hidden" th:value="${availpilot.kode}"/>
+                        </option>
                     </select>
-                    <input type="hidden" th:value="${availpilot}"/>
                 </div>
                 <div class="col col-9">
-                    <button type="submit" th:value="${availpilot}" class="btn btn-primary">Add Pilot</button>
+                    <button type="submit" class="btn btn-primary">Add Pilot</button>
                 </div>
             </div>
         </form>

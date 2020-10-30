@@ -16,16 +16,16 @@
             <div class="card-body">
                 <form th:href="@{/pilot/tambah}" th:object="${pilot}" method="POST">
                     <label for="nama">Nama</label>
-                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama"/>
+                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama"/>
                     <br>
                     <label for="nik">NIK</label>
-                    <input type="text" class="form-control" name="nik" id="nik" placeholder="Masukkan NIK"/>
+                    <input type="text" class="form-control" name="nik" id="nik" placeholder="NIK"/>
                     <br>
                     <label for="tempatlahir">Tempat Lahir</label>
-                    <input type="text" class="form-control" name="tempatLahir" id="tempatlahir" placeholder="Masukkan Tempat Lahir"/>
+                    <input type="text" class="form-control" name="tempatLahir" id="tempatlahir" placeholder="Tempat Lahir"/>
                     <br>
                     <label for="tanggallahir">Tanggal Lahir</label>
-                    <input type="text" class="form-control" name="tanggalLahir" id="tanggallahir" placeholder="Masukkan Tanggal Lahir"/>
+                    <input type="date" class="form-control" name="tanggalLahir" id="tanggallahir" placeholder="MM/DD/YYYY"/>
                     <br>
                     <label for="jeniskelamin">Jenis Kelamin</label>
                     <select class="form-control" name="jenisKelamin" id="jeniskelamin">

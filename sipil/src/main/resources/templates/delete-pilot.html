@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Pilot</title>
+    <title>Delete Pilot</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
@@ -10,7 +10,7 @@
     <nav th:replace="fragments/fragment :: navbar"></nav>
     <div class="container text-center mt-5">
         <h2 th:text = "'Pilot dengan NIP ' + ${nip}"></h2>
-        <h2 th:text = "' berhasil ditambahkan.'"></h2>
+        <h2 th:text = "' berhasil dihapus.'"></h2>
         <a href = "/pilot"><u>Kembali ke Daftar Pilot</u></a>
     </div>
 </body>

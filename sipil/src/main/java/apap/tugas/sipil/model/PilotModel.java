@@ -3,6 +3,7 @@ package apap.tugas.sipil.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,7 @@ public class PilotModel implements Serializable{
     private String nik;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggal_lahir", nullable = false)
     private Date tanggalLahir;
 
@@ -60,12 +62,6 @@ public class PilotModel implements Serializable{
 
     @OneToMany(mappedBy = "pilotModel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PilotPenerbanganModel> pilotPenerbangan;
-
-    /*@ManyToMany
-    @JoinTable(name = "pilot_penerbangan", joinColumns = @JoinColumn(name = "id_pilot", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "id_penerbangan", referencedColumnName = "id"))
-    List<PenerbanganModel> listPenerbanganPilot;
-    */
 
     public Long getId() {
         return Id;
